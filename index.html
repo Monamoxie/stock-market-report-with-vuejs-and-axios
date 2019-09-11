@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Available Stocks | World Trading Data API </title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" 
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+            crossorigin="anonymous">
+    <link href="css/style.css" type="text/css" rel="stylesheet"/>        
+</head>
+<body>
+    <div class="wrapper">
+
+        <div class="left-wrapper pull-left">
+            <div class="side-navigation">
+                <div class="logo-wrapper">
+                   <h2> Stock Xchange </h2> 
+                </div>
+                <ul class="side-url-links">
+                    <li> <i class="fa fa-bar-chart"></i> Dashboard </li>
+                    <li> <i class="fa fa-user"></i> Profile </li>
+                    <li> <i class="fa fa-cube"></i> Pricing Package </li>
+                    <li class="active"> <i class="fa fa-data"></i> Availability </li>
+                    <li> <i class="fa fa-camera"></i> Bookings </li>
+                    <li> <i class="fa fa-suitcase"></i> Portfolio </li>
+                    <li> <i class="fa fa-picture-o"></i> Albums </li>
+                    <li> <i class="fa fa-shopping-bag"></i> Subscriptions </li>
+                    <li> <i class="fa fa-money"></i> Payments </li>
+                    <li> <i class="fa fa-cog"></i> Setting</li>
+                </ul>
+                <div  class="footer">&copy; 2019 Peexo Technologies</div>
+            </div>
+        </div>
+
+        <div class="right-wrapper pull-right">
+            <div class="top-navigation">
+                <ul class="top-url-links">
+                    <li> Explore photos </li>
+                    <li>Find a photographer</li>
+                    <li> <i class="fa fa-file-text-o"></i></li>
+                    <li> <i class="fa fa-bell-o"></i></li>
+                    <li> <i class="fa fa-envelope-o"></i></li>
+                    <li class="avatar-wrap"> 
+                        <span> <img src="images/dp.jpg" alt="Avatar" /> </span>  
+                    </li>
+                    <li class="username-wrap"> Oghenetega <span class=""><i class="fa fa-angle-down"></i></span> </li>
+                    <div class="clearfix"></div>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="main-content"> 
+ 
+                <div class="data-wrapper" id="app">
+                    <div class="data-header"> 
+                        <label class=""> Today </label>
+                        <span class="month-of-year" > {{ todays_date }} </span> 
+                    </div> 
+                    <div class="data-container" v-if="processing">
+                        <vue-simple-spinner :speed="spin_speed" :size="spin_size" :line-size="line_size"></vue-simple-spinner>
+                    </div>
+
+                    <div class="data-container" v-else="processing">
+
+                        <div v-if="api_data.length < 1" class="alert alert-danger text-center">
+                            No record found
+                        </div>
+                        <div class="" v-else="api_data.length > 0">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Company Name</th> 
+                                        <th scope="col">Tradding as</th>
+                                        <th scope="col">Current Share Price</th> 
+                                    </tr>
+                                </thead>
+                                <tbody>    
+                                    <tr v-for="data in api_data">
+                                        <td> {{ data.name }}  </td> 
+                                        <td> {{ data.symbol }}  </td>
+                                        <td> {{ data.currency }} {{ data.price }}  </td> 
+                                    </tr>       
+                                </tbody>
+                            </table>
+                        </div>  
+                    </div>
+                     
+                </div>  
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+    <script src="node_modules/axios/dist/axios.js"></script>
+    <script src="js/vue-dev.js"></script>
+    <script type="text/javascript" src="node_modules/vue-simple-spinner/dist/vue-simple-spinner.min.js"></script>    
+    <script src="js/main.js"></script>
+
+    <!--    api key for alpha exchange
+        f05ID2ijzPrvuOcZ2hgUWWrXAcJITdrI3R2S7A4kuNTrWdNLzSKfwGfaL9Fz -->
+</body>
+</html>

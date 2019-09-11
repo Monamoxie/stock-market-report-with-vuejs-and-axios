@@ -1,0 +1,16 @@
+{
+  "name": "stock_exchange",
+  "version": "1.0.0",
+  "description": "A basic api call from the world trading data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mona Moxie",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "vue-simple-spinner": "^1.2.8",
+    "vuejs-progress-bar": "^1.1.1"
+  }
+}
