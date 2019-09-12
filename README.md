@@ -1,2 +1,5 @@
 # market_data
-A live market data of company stocks and forex transactions using VueJS and Axios HTTP Client
+A live tracker of the world's largest public companies using VueJS and Axios HTTP Client.
+
+**Historical Data for company stock, index, mutual fund or forex**
+

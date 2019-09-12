@@ -13,7 +13,7 @@ new Vue({
   mounted() {
     this.processing = true;
     const _self = this;  
-    axios.get('https://api.worldtradingdata.com/api/v1/stock?symbol=AAPL,MSFT,HSBA.L&api_token=f05ID2ijzPrvuOcZ2hgUWWrXAcJITdrI3R2S7A4kuNTrWdNLzSKfwGfaL9Fz')
+    axios.get('https://api.worldtradingdata.com/api/v1/stock?symbol=AAPL,MSFT,JPM,ADBE,HSBA.L&api_token=' + settings.API_TOKEN)
     .then(function(response) {  
       console.log(response.data.data);
      _self.api_data = response.data.data;   
@@ -25,6 +25,7 @@ new Vue({
       _self.processing = false;
     })
   }, 
+  
   methods: {
     getCurrYear() {
       return this.curr_date.getFullYear();
