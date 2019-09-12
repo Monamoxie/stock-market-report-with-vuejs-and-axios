@@ -1,5 +1,5 @@
-# market_data
+# Market Data for top companies across the world
 A live tracker of the world's largest public companies using VueJS and Axios HTTP Client.
 
-**Historical Data for company stock, index, mutual fund or forex**
+Historical Data for company stock, index, mutual fund or forex
 
