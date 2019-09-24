@@ -1,4 +1,4 @@
-new Vue({
+const app = new Vue({
   el: '#app',
     
   data: { 
@@ -11,22 +11,39 @@ new Vue({
   },
 
   mounted() {
+
     this.processing = true;
-    const _self = this;  
-    axios.get('https://api.worldtradingdata.com/api/v1/stock?symbol=AAPL,MSFT,JPM,ADBE,HSBA.L&api_token=' + settings.API_TOKEN)
-    .then(function(response) {  
-      console.log(response.data.data);
-     _self.api_data = response.data.data;   
-    })
-    .catch(error => {
-      console.log(error) 
-    })
-    .finally(function() {
-      _self.processing = false;
-    })
+    const _self = this;
+    const list_of_companies = settings.LISTOFCOMPANIES();
+
+    list_of_companies.forEach(function(e, i) {
+        let box = list_of_companies[i];
+        let symbols = '';
+        box.forEach(function(c, p){
+          symbols +=  ( p === box.length - 1 ) ? box[p] : box[p] + ',';
+        }); 
+        axios.get( settings.API_URL + 'stock?symbol='+symbols+'&api_token=' + settings.API_TOKEN)
+        .then(function(response) {   
+          _self.api_data.push(response.data.data);  
+           
+        }).catch(error => {
+        console.log(error) 
+        }).finally(function() {
+        _self.processing = false;
+      })
+    });  
+  },
+
+  computed: {
+    companies() {
+      console.log(this.api_data.flat());
+      return this.api_data.flat();
+    }
   }, 
   
   methods: {
+
+    
     getCurrYear() {
       return this.curr_date.getFullYear();
     },
