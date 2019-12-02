@@ -1,20 +1,55 @@
-var settings = {
+var Settings = {
 
-    API_URL: 'https://api.worldtradingdata.com/api/v1/',
+    /**
+     * 
+     * The default URL for the World Trading Data API
+     * 
+     * @string
+     */
+    apiUrl: 'https://api.worldtradingdata.com/api/v1/',
 
-    API_TOKEN: 'f05ID2ijzPrvuOcZ2hgUWWrXAcJITdrI3R2S7A4kuNTrWdNLzSKfwGfaL9Fz',
+    /**
+     * 
+     * Secret API token for all your requests
+     * 
+     * @string
+     */
+    apiToken: 'f05ID2ijzPrvuOcZ2hgUWWrXAcJITdrI3R2S7A4kuNTrWdNLzSKfwGfaL9Fz',
 
-    /** 
-     * FREE API key only permits a max of 5 company info per request
-     *  A group of 5 companies are sent per request to retrieve data
-     * To get more than 5 returns per requst, group companies into arrays with max of 5 elements
+    /**
+     *  IMPORTANT NOTICE: 
+     *  The FREE API key only allows a maximum of 5 company info per request
+     *  So sending a request with more than 5 company names will only return data for the first 5, and omit the rest
+     *  Peradventure you need data for more than 5, add an array to the method below with a maximum of just 5 companies as elements
     */ 
-   LISTOFCOMPANIES() {
+
+
+    /**
+     * 
+     * Trading names of Publicly traded comapanies
+     * 
+     * @array
+     */
+    stockCompanies() {
         return [
             ['AAPL', 'MSFT', 'CSCO', 'ADBE', 'INTC'],
             ['APA', 'GE', 'F', 'EBAY', 'ORCL'],
             ['YHOO', 'HPQ', 'GM', 'NVDA', 'KO'],
         ];
+    },
+
+    /**
+     * 
+     * Trading names of Mutual fund companiees
+     * 
+     * @array
+     */
+    mutualFundCompanies() {
+        return [
+            ['VFIAX', 'SPY', 'FXAIX', 'IVV', 'FGTXX']
+        ];
     }
+
+
         
-}
+};
