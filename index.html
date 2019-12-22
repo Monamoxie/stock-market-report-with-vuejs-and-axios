@@ -20,17 +20,23 @@
                 <div class="logo-wrapper">
                    <h2> Stock Xchange </h2> 
                 </div>
-                <ul class="side-url-links">
-                    <li v-bind:class="requestType === 'sharePrice' ? 'active' : '' "
-                        v-on:click="prepRequest(['sharePrice'])"> <i class="fa fa-bar-chart"></i> Share Price 
-                    </li>
-                    <li v-bind:class="requestType === 'mutualFunds' ? 'active' : '' "
-                        v-on:click="prepRequest(['mutualFunds'])"> <i class="fa fa-user"></i> Mutual Funds 
-                    </li>
-                    <li v-on:click="prepRequest('')"> <i class="fa fa-cube"></i> Intra Day Market Data </li>
-                    <li v-on:click="prepRequest('')"> <i class="fa fa-data"></i> Historical </li>
-                    <li v-on:click="prepRequest('')"> <i class="fa fa-camera"></i> Bookings </li>
-                    <li v-on:click="prepRequest('')"> <i class="fa fa-suitcase"></i> Forex Data </li>
+                <ul class="side-url-links"> 
+                    <router-link to="/share-price">
+                        <li  v-on:click="prepRequest(['share-price'])" v-bind:class="requestType === 'share-price' ? 'active' : ''"> 
+                            <i class="fa fa-bar-chart"></i> Share Price 
+                        </li>
+                    </router-link>
+                    <router-link to="/mutual-funds">
+                        <li v-on:click="prepRequest(['mutual-funds'])" v-bind:class="requestType === 'mutual-funds' ? 'active' : '' "> 
+                            <i class="fa fa-users"></i> Mutual Funds 
+                        </li>
+                    </router-link> 
+                    <a href="https://www.worldtradingdata.com/documentation#introduction" target="_blank">
+                        <li> <i class="fa fa-cube"></i> Documentation </li> 
+                    </a>
+                    <a href="https://github.com/Monamoxie/stock_market_report_with_vuejs_and_axios" target="_blank">
+                        <li> <i class="fa fa-suitcase"></i> Github Repo</li>  
+                    </a>
                     
                 </ul> 
             </div>
@@ -38,13 +44,13 @@
 
         <div class="right-wrapper pull-right">
             <div class="top-navigation">
-                <ul class="top-url-links"> 
-                    <li>Github Repo</li>
-                     
+                <ul class="top-url-links">  
                     <li class="avatar-wrap"> 
                         <span> <img src="images/dp.jpg" alt="Avatar" /> </span>  
                     </li>
-                    <li class="username-wrap"> Admin <span class=""><i class="fa fa-angle-down"></i></span> </li>
+                    <li class="username-wrap"> <a href="https://github.com/Monamoxie/stock_market_report_with_vuejs_and_axios" target="_blank">
+                        Home </a>
+                        <span class=""><i class="fa fa-angle-down"></i></span> </li>
                     <div class="clearfix"></div>
                 </ul>
                 <div class="clearfix"></div>
@@ -53,55 +59,24 @@
  
                 <div class="data-wrapper" id="app">
                     <div class="data-header"> 
-                        <label class=""> Today </label>
-                        <button v-on:click="say('hi')">Say hi</button>
+                        <label class=""> Today </label> 
                         <span class="month-of-year" > {{ todays_date }} </span> 
-                    </div> 
-                    <div class="data-container" v-if="processing">
-                        <vue-simple-spinner :speed="spin_speed" :size="spin_size" :line-size="line_size"></vue-simple-spinner>
-                    </div>
-
-                    <div class="data-container" v-else="processing">
-
-                        <div v-if="companies.length < 1" class="alert alert-danger text-center">
-                            No record found
-                        </div>
-
-                        <div class="" v-else="companies.length > 0">
-                            <table class="table">
-                                <thead class="thead-theme">
-                                    <tr>
-                                        <th scope="col">Company Name</th> 
-                                        <th scope="col">Trading as</th>
-                                        <th scope="col">Current Share Price</th> 
-                                    </tr>
-                                </thead>
-                                <tbody>    
-                                    <tr v-for="(company, index) in companies">
-                                      
-                                        <td>  
-                                              {{ company.name }}  
-                                        </td> 
-                                        <td> {{ company.symbol }}  </td>
-                                        <td> {{ company.currency }} {{ company.price }}  </td> 
-                                    </tr>       
-                                </tbody>
-                            </table>
-                        </div>  
-                    </div>
-                     
+                    </div>  
+                        <router-view></router-view> 
                 </div>  
 
             </div>
         </div>
         <div class="clearfix"></div>
-
+ 
     </div>
     <script src="node_modules/axios/dist/axios.js"></script>
     <script src="js/vue-dev.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="node_modules/vue-simple-spinner/dist/vue-simple-spinner.min.js"></script>    
     <script src="js/settings.js"></script>
-    <script src="js/main.js"></script>
- 
+    <script src="js/templates.js"></script>
+    <script src="js/routes-register.js"></script>
+    <script src="js/main.js"></script> 
 </body>
 </html>

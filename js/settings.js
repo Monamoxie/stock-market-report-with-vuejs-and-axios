@@ -10,6 +10,14 @@ var Settings = {
 
     /**
      * 
+     * URL for the Intra Day Data
+     * #@string
+     */
+    intraDayDataUrl: 'https://intraday.worldtradingdata.com/api/v1/',
+    
+
+    /**
+     * 
      * Secret API token for all your requests
      * 
      * @string
@@ -46,7 +54,9 @@ var Settings = {
      */
     mutualFundCompanies() {
         return [
-            ['VFIAX', 'SPY', 'FXAIX', 'IVV', 'FGTXX']
+            ['JEITX', 'CWGIX', 'FXAIX', 'SGENX', 'OWLSX'],
+            ['MDISX', 'OGLBX', 'IVWIX', 'VFIAX', 'BEGRX'],
+            ['MGGIX', 'TEMWX', 'JANRX', 'GMGEX', 'PAGLX'],
         ];
     }
 
