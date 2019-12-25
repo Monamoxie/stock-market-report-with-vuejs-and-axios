@@ -23,3 +23,6 @@ https://stock-xchanger.herokuapp.com
 
 ![Image 2](images/stock_market_info.png)
 
+# LICENSE 
+MIT License
+
