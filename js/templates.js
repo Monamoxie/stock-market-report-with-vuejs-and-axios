@@ -11,7 +11,8 @@ const sharePrice = Vue.component('share-price', {
             spin_size: 55,
             spin_speed: 2, 
             overlay: false,
-            overlay_data: []
+            overlay_loader: false,
+            overlay_data: null
         } 
     },
 
@@ -53,13 +54,14 @@ const sharePrice = Vue.component('share-price', {
         },
         
         intraDayData(symbol) {
-            this.overlay = true;
             const _self = this; 
-            axios.get( Settings.intraDayDataUrl + 'intraday?symbol='+symbol+'&api_token=' + Settings.apiToken + '&interval=15&range=2')
+            _self.overlay = true;
+            _self.overlay_loader = false; 
+            axios.get( Settings.intraDayDataUrl + 'intraday?symbol='+symbol+'&api_token=' + Settings.apiToken + '&interval=60&range=1')
               .then(function(response) {   
-                _self.overlay_data.push(response.data.data);  
-                console.log(response.data);   
-                alert(response.data.symbol);
+                _self.overlay_data = response.data;
+                _self.overlay_loader = true;  
+                console.log(response.data);  
               })
               .catch(error => { 
                 console.log(error);
@@ -110,8 +112,26 @@ const sharePrice = Vue.component('share-price', {
                         <div class="overlay-content">
                             <p class="pull-right"><button v-on:click="overlay = false" class="btn btn-danger">X</button></p>
                             <div class="clearfix"></div>
-                            <div v-if="overlay_data.length">
-                                <h4> Trading Name: {{ overlay_data.symbol }} </h4>
+                            <div v-if="!overlay_loader">
+                                <p> Please wait... </p>
+                            </div>
+                            <div v-if="overlay_loader && overlay_data != null ">
+                                <div class="overlay-data">
+                                    <h4> Trading Name: {{ overlay_data.symbol }} </h4>
+                                    <ul>
+                                        <li>Stock Exchange Market: <span> {{ overlay_data.stock_exchange_short }} </span></li> 
+                                        <li>Stock Timezone: <span> {{ overlay_data.timezone_name }} </span></li>
+                                    </ul> 
+                                    <div v-for="(data, key) in overlay_data.intraday">
+                                        <p><b> Date and Time: <span> {{ key }} </span></b> </p>
+                                        <p> Opening Price: USD {{ data.open }} </p>
+                                        <p> Closing Price: USD {{ data.close }} </p>
+                                        <p> Highest Price Reached: USD {{ data.high }} </p>
+                                        <p> Lowest Price Reached: USD {{ data.low }} </p>
+                                        <p> Volume Traded:  {{ data.volume }} </p>
+                                        <hr>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
