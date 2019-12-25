@@ -8,7 +8,7 @@ It comes pre bundled with the ability to
 * Opening and closing price and 
 * Total volume of shares traded
 
-# Stacks Used
+# Technology Stack
 
 * Vue Js framework
 * CSS Bootstrap
