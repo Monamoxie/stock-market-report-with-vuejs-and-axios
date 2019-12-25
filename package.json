@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A live monitor of publicly traded companies on the stock market and mutual fund companies using VueJS and Axios HTTP Client",
   "main": "index.js",
-  
+  "scripts": {
+    "start": "node main.js"
+  },
   "author": "Mona Moxie",
   "license": "ISC",
   "dependencies": {
