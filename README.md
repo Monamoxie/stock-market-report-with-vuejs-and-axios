@@ -1,12 +1,25 @@
 ![Logo](images/logo.png)
 
-A live monitor of publicly traded companies on the stock market as well mutual fund companies using VueJS, Axios HTTP Client using API endpoints from the World Trading Data (WDT).
+A live monitor of publicly traded companies on the stock market and mutual fund companies using VueJS, Axios HTTP Client using API endpoints from the World Trading Data (WDT).
 It comes pre bundled with the ability to 
 * Track and view current share price at any given time
 * View highest price reached for that day
-* View lowest price droped to for that day
+* View lowest price dropped to for that day
 * Opening and closing price and 
 * Total volume of shares traded
 
-Historical Data for company stock, index, mutual fund or forex
+# Stacks Used
+
+* Vue Js framework
+* CSS Bootstrap
+* Axios HTTP Client
+* The World Trading Data API
+
+# DEMO URL
+
+https://stock-xchanger.herokuapp.com
+
+![Image 1](images/stock_market.png)
+
+![Image 2](images/stock_market_info.png)
 
