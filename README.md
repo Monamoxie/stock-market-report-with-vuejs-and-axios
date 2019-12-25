@@ -1,6 +1,6 @@
 # Stock Xchanger
 
-!(/images/logo.png)
+![Logo](images/logo.png)
 
 A live tracker of the world's largest public companies using VueJS and Axios HTTP Client.
 
