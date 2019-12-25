@@ -15,7 +15,7 @@
 <body>
     <div class="wrapper" id="stock-handler">
 
-        <div class="left-wrapper pull-left">
+        <div class="left-wrapper pull-left" :class="[ mobileMenu ? 'mobile-menu ' : '' ]">
             <div class="side-navigation">
                 <div class="logo-wrapper">
                    <h2> Stock Xchanger </h2> 
@@ -32,10 +32,10 @@
                         </li>
                     </router-link> 
                     <a href="https://www.worldtradingdata.com/documentation#introduction" target="_blank">
-                        <li> <i class="fa fa-cube"></i> Documentation </li> 
+                        <li v-on:click="prepRequest(['docs'])"> <i class="fa fa-cube"></i> Documentation </li> 
                     </a>
                     <a href="https://github.com/Monamoxie/stock-market-report-with-vuejs-and-axios" target="_blank">
-                        <li> <i class="fa fa-suitcase"></i> Github Repo</li>  
+                        <li v-on:click="prepRequest(['repo'])"> <i class="fa fa-suitcase"></i> Github Repo</li>  
                     </a>
                     
                 </ul> 
@@ -44,6 +44,7 @@
 
         <div class="right-wrapper pull-right">
             <div class="top-navigation">
+                <span class="mobile-toggable" v-on:click="mobileToggler"> <i class="fa fa-bars"></i> </span>
                 <ul class="top-url-links">  
                     <li class="avatar-wrap"> 
                         <span> <img src="images/dp.jpg" alt="Avatar" /> </span>  

@@ -122,7 +122,13 @@ html, body {
 .right-wrapper .top-navigation .top-url-links
 {
     float: right;
-    margin: 40px 80px 40px 0;
+}
+.right-wrapper .top-navigation {
+    padding: 40px 80px 40px 20px;
+}
+.mobile-toggable {
+    cursor: pointer;
+    display: none;
 }
 .right-wrapper .top-navigation .top-url-links li
 {
@@ -159,8 +165,7 @@ html, body {
     margin-left:-10px;
     position: relative;
 }
-.right-wrapper .top-navigation .top-url-links li.username-wrap span i.fa
-{ 
+.right-wrapper .top-navigation .top-url-links li.username-wrap span i.fa { 
     font-size: 20px; 
     display: inline-block;
     margin-left: 20px;
@@ -202,35 +207,7 @@ html, body {
 /*
 * Searchbox input
 */
-.searchbox-wrapper input
-{
-    background-color: #fff; 
-    padding: 12px 15px;
-    color: #555;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 350px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-} 
-.searchbox-wrapper input:focus
-{
-  border-color: rgb(214, 148, 25);
-  outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(214, 148, 25, .6);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.103), 0 0 8px rgba(214, 148, 25, .6);
-}
-.searchbox-wrapper i.fa
-{
-    position: absolute;
-    right: 10px;
-    top: 13px; 
-    cursor: pointer;
-}
-
+ 
 
 /*
 * Add schedule button
@@ -397,6 +374,27 @@ html, body {
         list-style: none;
     }
   
+    @media(max-width: 1000px) {
+        .left-wrapper {  
+            display: none;
+            
+        }
+        .right-wrapper { 
+            width: 100%;
+            margin-left: 0;
+        }
+        .data-container {
+            box-shadow: none;
+        }
+        .mobile-toggable { 
+            display: block;
+        }
+    }
+    .mobile-menu {
+        display: block;
+        z-index: 333333;
+        width: 70%;
+    }
 
 
 

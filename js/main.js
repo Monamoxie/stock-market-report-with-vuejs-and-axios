@@ -6,8 +6,12 @@ const app = new Vue({
   data: { 
     processing: true,
     todays_date: new Date(),    
-    requestType: 'share-price'
+    requestType: 'share-price',
+    mobileMenu: false
   }, 
+  computed: {
+
+  },
   methods: {
 
     getCurrYear() {
@@ -23,8 +27,13 @@ const app = new Vue({
     },  
  
     prepRequest(entities) {  
-      this.requestType = entities[0];  
+      this.requestType = entities[0]; 
+      this.mobileMenu = false; 
     },
+
+    mobileToggler() {
+      this.mobileMenu = this.mobileMenu ? false : true;
+    }
 
   },
   
