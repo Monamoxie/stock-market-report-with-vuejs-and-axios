@@ -5,7 +5,7 @@ const app = new Vue({
     
   data: { 
     processing: true,
-    todays_date: new Date(),    
+    todaysDate: new Date(),    
     requestType: 'share-price',
     mobileMenu: false
   }, 

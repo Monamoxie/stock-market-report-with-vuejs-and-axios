@@ -5,14 +5,14 @@ const sharePrice = Vue.component('share-price', {
     props: ['requestType'],
     data: function () {
         return {
-            api_data: [],
+            apiData: [],
             processing: false, 
-            line_size: 124,
-            spin_size: 55,
-            spin_speed: 2, 
+            lineSize: 124,
+            spinSize: 55,
+            spinSpeed: 2, 
             overlay: false,
-            overlay_loader: false,
-            overlay_data: null
+            overlayLoader: false,
+            overlayData: null
         } 
     },
 
@@ -23,7 +23,7 @@ const sharePrice = Vue.component('share-price', {
     
     computed: {
         companies() {  
-          return this.api_data.flat();
+          return this.apiData.flat();
         }
     }, 
 
@@ -39,7 +39,7 @@ const sharePrice = Vue.component('share-price', {
 
               axios.get( Settings.apiUrl + 'stock?symbol='+symbols+'&api_token=' + Settings.apiToken)
               .then(function(response) {   
-                _self.api_data.push(response.data.data);     
+                _self.apiData.push(response.data.data);     
               })
               .catch(error => { 
                 console.log(error);
@@ -56,11 +56,11 @@ const sharePrice = Vue.component('share-price', {
         intraDayData(symbol) {
             const _self = this; 
             _self.overlay = true;
-            _self.overlay_loader = false; 
+            _self.overlayLoader = false; 
             axios.get( Settings.intraDayDataUrl + 'intraday?symbol='+symbol+'&api_token=' + Settings.apiToken + '&interval=60&range=1')
               .then(function(response) {   
-                _self.overlay_data = response.data;
-                _self.overlay_loader = true;  
+                _self.overlayData = response.data;
+                _self.overlayLoader = true;  
                 console.log(response.data);  
               })
               .catch(error => { 
@@ -73,7 +73,7 @@ const sharePrice = Vue.component('share-price', {
     template: 
         `
         <div class="data-container" v-if="processing">
-            <vue-simple-spinner :speed="spin_speed" :size="spin_size" :line-size="line_size"></vue-simple-spinner>
+            <vue-simple-spinner :speed="spinSpeed" :size="spinSize" :line-size="lineSize"></vue-simple-spinner>
         </div>
         <div class="data-container" v-else="processing">
             <h3> SHARE PRICE </h3> 
@@ -112,17 +112,17 @@ const sharePrice = Vue.component('share-price', {
                         <div class="overlay-content">
                             <p class="pull-right"><button v-on:click="overlay = false" class="btn btn-danger">X</button></p>
                             <div class="clearfix"></div>
-                            <div v-if="!overlay_loader">
+                            <div v-if="!overlayLoader">
                                 <p> Please wait... </p>
                             </div>
-                            <div v-if="overlay_loader && overlay_data != null ">
+                            <div v-if="overlayLoader && overlayData != null ">
                                 <div class="overlay-data">
-                                    <h4> Trading Name: {{ overlay_data.symbol }} </h4>
+                                    <h4> Trading Name: {{ overlayData.symbol }} </h4>
                                     <ul>
-                                        <li>Stock Exchange Market: <span> {{ overlay_data.stock_exchange_short }} </span></li> 
-                                        <li>Stock Timezone: <span> {{ overlay_data.timezone_name }} </span></li>
+                                        <li>Stock Exchange Market: <span> {{ overlayData.stock_exchange_short }} </span></li> 
+                                        <li>Stock Timezone: <span> {{ overlayData.timezone_name }} </span></li>
                                     </ul> 
-                                    <div v-for="(data, key) in overlay_data.intraday">
+                                    <div v-for="(data, key) in overlayData.intraday">
                                         <p><b> Date and Time: <span> {{ key }} </span></b> </p>
                                         <p> Opening Price: USD {{ data.open }} </p>
                                         <p> Closing Price: USD {{ data.close }} </p>
@@ -149,11 +149,11 @@ const sharePrice = Vue.component('share-price', {
 const mutualFunds = Vue.component('nutual-funds', {
     data: function () {
         return {
-            api_data: [],
+            apiData: [],
             processing: false, 
-            line_size: 124,
-            spin_size: 55,
-            spin_speed: 2, 
+            lineSize: 124,
+            spinSize: 55,
+            spinSpeed: 2, 
         } 
     },
 
@@ -164,7 +164,7 @@ const mutualFunds = Vue.component('nutual-funds', {
     
     computed: {
         companies() {  
-          return this.api_data.flat();
+          return this.apiData.flat();
         }
     }, 
 
@@ -183,7 +183,7 @@ const mutualFunds = Vue.component('nutual-funds', {
 
             axios.get( Settings.apiUrl + 'mutualfund?symbol='+symbols+'&api_token=' + Settings.apiToken + '&sort_by=list_order')
             .then(function(response) {    
-                _self.api_data.push(response.data.data);  
+                _self.apiData.push(response.data.data);  
                 
             }).catch(error => { 
                 console.log(error);
@@ -199,7 +199,7 @@ const mutualFunds = Vue.component('nutual-funds', {
     template: 
         `
         <div class="data-container" v-if="processing">
-            <vue-simple-spinner :speed="spin_speed" :size="spin_size" :line-size="line_size"></vue-simple-spinner>
+            <vue-simple-spinner :speed="spinSpeed" :size="spinSize" :line-size="lineSize"></vue-simple-spinner>
         </div>
         <div class="data-container" v-else="processing"> 
             <div v-if="companies.length < 1" class="alert alert-danger text-center">
