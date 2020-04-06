@@ -8,21 +8,21 @@
                    <h2> Stock Xchanger </h2> 
                 </div>
                 <ul class="side-url-links"> 
-                    <router-link to="/share-price">
-                        <li v-on:click="prepRequest(['share-price'])" v-bind:class="requestType === 'share-price' ? 'active' : ''"> 
+                    <a href="/share-price">
+                        <li :class="path === '/' ? 'active' : ''"> 
                             <i class="fa fa-bar-chart"></i> Share Price 
                         </li>
-                    </router-link>
-                    <router-link to="/mutual-funds">
-                        <li v-on:click="prepRequest(['mutual-funds'])" v-bind:class="requestType === 'mutual-funds' ? 'active' : '' "> 
+                    </a>
+                    <a href="/mutual-funds">
+                        <li :class="path === '/mutual-funds' ? 'active' : ''"> 
                             <i class="fa fa-users"></i> Mutual Funds 
                         </li>
-                    </router-link> 
+                    </a> 
                     <a href="https://www.worldtradingdata.com/documentation#introduction" target="_blank">
-                        <li v-on:click="prepRequest(['docs'])"> <i class="fa fa-cube"></i> Documentation </li> 
+                        <li> <i class="fa fa-cube"></i> Documentation </li> 
                     </a>
                     <a href="https://github.com/Monamoxie/stock-market-report-with-vuejs-and-axios" target="_blank">
-                        <li v-on:click="prepRequest(['repo'])"> <i class="fa fa-suitcase"></i> Github Repo</li>  
+                        <li> <i class="fa fa-suitcase"></i> Github Repo</li>  
                     </a>
                     
                 </ul> 
@@ -31,7 +31,9 @@
 
         <div class="right-wrapper pull-right">
             <div class="top-navigation">
-                <span class="mobile-toggable" v-on:click="mobileToggler"> <i class="fa fa-bars"></i> </span>
+                <span v-if="!menuOpen" class="mobile-toggable" v-on:click="mobileToggler"> <i class="fa fa-bars"></i> </span>
+                <span v-else class="mobile-toggable" v-on:click="mobileToggler"> <i class="fa fa-bars"></i> </span>
+
                 <ul class="top-url-links">  
                     <li class="avatar-wrap"> 
                         <span> <img src="images/dp.jpg" alt="Avatar" /> </span>  
@@ -55,7 +57,7 @@
         <div class="clearfix"></div>
  
     </div>
-    <router-view/>
+     
   </div>
 </template>
 
@@ -71,8 +73,39 @@ export default {
     return {
       mobileMenu: false,
       processing: true,
-      todaysDate: new Date(), 
+      todaysDate: new Date(),
+      path: '/',
+      
     }
-  }
+  },
+  mounted() {
+    this.path = this.$route.path
+  },
+  computed: {
+    menuOpen() {
+        return this.mobileMenu;
+    }
+  },
+  methods: {
+
+    getCurrYear() {
+      return this.currDate.getFullYear();
+    },
+        
+    getCurrMonth() {
+      return this.currDate.getMonth();
+    },
+
+    getCurrDay() {
+      return this.currDate.getDate();
+    },  
+ 
+    mobileToggler() {
+      this.mobileMenu = this.mobileMenu ? false : true;
+    },
+
+    
+
+  },
 }
 </script>

@@ -376,8 +376,7 @@ html, body {
   
     @media(max-width: 1000px) {
         .left-wrapper {  
-            display: none;
-            
+            display: none;   
         }
         .right-wrapper { 
             width: 100%;
@@ -388,6 +387,9 @@ html, body {
         }
         .mobile-toggable { 
             display: block;
+            position: fixed;
+            left: 20px;
+            z-index: 2333999 
         }
     }
     .mobile-menu {
