@@ -8,7 +8,7 @@
                    <h2> Stock Xchanger </h2> 
                 </div>
                 <ul class="side-url-links"> 
-                    <a href="/share-price">
+                    <a href="/">
                         <li :class="path === '/' ? 'active' : ''"> 
                             <i class="fa fa-bar-chart"></i> Share Price 
                         </li>
@@ -49,7 +49,8 @@
                         <label class=""> Today </label> 
                         <span class="month-of-year" > {{ todaysDate }} </span> 
                     </div>  
-                        <router-view></router-view> 
+                        <router-view @loadSharePrice="loadSharePrice" 
+                         @loadMutualFunds="loadMutualFunds"></router-view> 
                 </div>  
 
             </div>
@@ -75,7 +76,7 @@ export default {
       processing: true,
       todaysDate: new Date(),
       path: '/',
-      
+      apiData: [],
     }
   },
   mounted() {
@@ -103,6 +104,13 @@ export default {
     mobileToggler() {
       this.mobileMenu = this.mobileMenu ? false : true;
     },
+
+    loadSharePrice() {
+        
+    },
+    loadMutualFunds() {
+        alert('nutual funds');
+    }
 
     
 
