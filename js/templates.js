@@ -29,7 +29,6 @@ const sharePrice = Vue.component('share-price', {
 
     methods: {
         
-        
         intraDayData(symbol) {
             const _self = this; 
             _self.overlay = true;

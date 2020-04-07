@@ -51,6 +51,9 @@
                     </div>  
                         <router-view 
                         :processing="processing"
+                        :serverResponse="serverResponse"
+                        :companiesData="companiesData"
+                        :overlayData="overlayData"
                         @sharePrice="sharePrice" 
                         @loadMutualFunds="loadMutualFunds"></router-view> 
                 </div>  
@@ -82,7 +85,9 @@ export default {
       processing: true,
       todaysDate: new Date(),
       path: '/',
-      apiData: [],
+      data: [],
+      serverResponse: [],
+      overlayData: []
     }
   },
  
@@ -95,7 +100,12 @@ export default {
   computed: {
     menuOpen() {
         return this.mobileMenu;
-    }
+    },
+    companiesData() {
+      // console.log(this.data.flat())
+      return this.data.flat()
+    },
+
   },
   methods: {
 
@@ -131,23 +141,49 @@ export default {
             _self.$store.dispatch('sharePrice', {
               symbols
             })
-
-            axios.get( )
-            .then(function(response) {   
-              _self.apiData.push(response.data.data);     
+            .then((response) => {   
+              _self.data.push(response.data.data); 
             })
             .catch(error => { 
               console.log(error);
+              this.serverResponse = [{
+              'status': 'error',
+              'message': 'An error occured. Request was not processed',
+              'errors': error.response.data.errors !== null && error.response.data.errors !== undefined ? Object.values(error.response.data.errors) : []
+              }]   
             })
-            .finally(function() {
-            _self.processing = false;
+            .finally(() => {
+              _self.processing = false;
           })
+          
         }); 
       }
        
     },
+
+    intraDayData(symbol) {
+         _self = this;
+          _self.$store.dispatch('intraDayData', {
+            symbol
+          })
+          .then(function(response) {   
+            _self.overlayData.push(response.data); 
+          })
+          .catch(error => { 
+            console.log(error);
+            this.serverResponse = [{
+            'status': 'error',
+            'message': 'An error occured. Request was not processed',
+            'errors': error.response.data.errors !== null && error.response.data.errors !== undefined ? Object.values(error.response.data.errors) : []
+            }]   
+          })
+          .finally(() => {
+            _self.processing = false;
+        })
+    },
+
     loadMutualFunds() {
-        alert('nutual funds');
+      alert('nutual funds');
     }
 
     

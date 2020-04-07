@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
 
 Vue.use(Vuex)
 
@@ -24,10 +27,9 @@ export default new Vuex.Store({
      * 
      * @type Array
      */
-    stockCompanies: [
-        ['AAPL', 'MSFT', 'CSCO', 'ADBE', 'INTC'],
-        ['APA', 'GE', 'F', 'EBAY', 'ORCL'],
-        ['YHOO', 'HPQ', 'GM', 'NVDA', 'KO'],
+    stockCompanies: [ 
+        ['APA', 'GE', 'F', 'ADBE', 'ORCL'],
+        ['MSFT', 'HPQ', 'GM', 'NVDA', 'KO'],
     ],
 
     /**
@@ -99,31 +101,32 @@ export default new Vuex.Store({
     },
 
   },
-
-
-  mutations: {
-
-  },
+ 
   actions: {
     sharePrice(context, payload) {
-      alert(context.getters.getApiToken)
-    //   return new Promise((resolve, reject) => {
-    //     // axios.get(Settings.apiUrl + 'stock?symbol='+symbols+'&api_token=' + Settings.apiToken, {
-    //     //     name: credentials.name,
-    //     //     email: credentials.email,
-    //     //     password: credentials.password
-    //     // })
-    //     // .then(response => { 
-    //     //     resolve(response)
-    //     // })
-    //     // .catch(errors => {
-    //     //     console.log(errors)
-    //     //     reject(errors)
-    //     // })
-    // })
-    }
-  },
-  modules: {
+      return new Promise((resolve, reject) => {
+        axios.get(context.getters.getDefaultApiUrl + 'stock?symbol='+payload.symbols+'&api_token=' + context.getters.getApiToken, 
+        { useCredentails: true })
+        .then(response => { 
+            resolve(response)
+        })
+        .catch(errors => { 
+          reject(errors)
+        })
+      })
+    },
 
-  }
+    intraDayData(context, payload) {
+      alert('dddd')
+      // return new Promise((resolve, reject) => {
+      //   axios.get(context.getters.getIntraDayApiUrl + 'stock?symbol='+payload.symbol+'&api_token=' + context.getters.getApiToken +  '&interval=60&range=1')
+      //   .then(response => { 
+      //       resolve(response)
+      //   })
+      //   .catch(errors => { 
+      //     reject(errors)
+      //   })
+      // })
+    }
+  }, 
 })
