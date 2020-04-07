@@ -2,7 +2,7 @@
   <div class="share-price">
 
     <div class="data-container" v-if="processing">
-      <vue-simple-spinner :speed="spinSpeed" :size="spinSize" :line-size="lineSize"></vue-simple-spinner>
+      <vue-simple-spinner :speed="spinnerData.spinSpeed" :size="spinnerData.spinSize" :line-size="spinnerData.lineSize"></vue-simple-spinner>
     </div>
        <!-- <div class="data-container" v-else="processing">
           <h3> SHARE PRICE </h3> 
@@ -71,9 +71,33 @@
 </template>
 
 <script>
- 
+
+
 export default {
-  name: 'Home',
+  name: 'SharePrice',
+
+  data() {
+        return { 
+          spinnerData: {
+            lineSize: 124,
+            spinSize: 55,
+            spinSpeed: 2,
+          },  
+            
+          overlay: false,
+          overlayLoader: false,
+          overlayData: null
+        } 
+  },
+
+  
+
+  props: {
+    processing: {
+      type: Boolean,
+      required: true,
+    }
+  },
 
   mounted() {
     this.$emit('loadSharePrice')

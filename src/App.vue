@@ -49,8 +49,10 @@
                         <label class=""> Today </label> 
                         <span class="month-of-year" > {{ todaysDate }} </span> 
                     </div>  
-                        <router-view @loadSharePrice="loadSharePrice" 
-                         @loadMutualFunds="loadMutualFunds"></router-view> 
+                        <router-view 
+                        :processing="processing"
+                        @loadSharePrice="loadSharePrice" 
+                        @loadMutualFunds="loadMutualFunds"></router-view> 
                 </div>  
 
             </div>
@@ -68,8 +70,12 @@
 @import url('assets/css/style.css');
 </style>
 <script>
+
+
 export default {
+
   name: 'App',
+
   data() {
     return {
       mobileMenu: false,
@@ -79,9 +85,13 @@ export default {
       apiData: [],
     }
   },
+ 
+
   mounted() {
     this.path = this.$route.path
+    this.processing = true
   },
+  
   computed: {
     menuOpen() {
         return this.mobileMenu;
