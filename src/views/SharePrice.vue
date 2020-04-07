@@ -1,8 +1,11 @@
 <template>
   <div class="share-price">
 
-    <div class="data-container" v-if="processing">
-      <vue-simple-spinner :speed="spinnerData.spinSpeed" :size="spinnerData.spinSize" :line-size="spinnerData.lineSize"></vue-simple-spinner>
+    <div class="data-container text-center" v-if="processing">
+      <div class="lds-ring mt-5">
+        <div></div><div></div><div></div><div></div>
+      </div>
+      <p> Loading...</p>
     </div>
        <!-- <div class="data-container" v-else="processing">
           <h3> SHARE PRICE </h3> 
@@ -100,7 +103,7 @@ export default {
   },
 
   mounted() {
-    this.$emit('loadSharePrice')
+    this.$emit('sharePrice')
   }
   
 }

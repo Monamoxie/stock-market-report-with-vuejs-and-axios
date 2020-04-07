@@ -51,7 +51,7 @@
                     </div>  
                         <router-view 
                         :processing="processing"
-                        @loadSharePrice="loadSharePrice" 
+                        @sharePrice="sharePrice" 
                         @loadMutualFunds="loadMutualFunds"></router-view> 
                 </div>  
 
@@ -115,8 +115,36 @@ export default {
       this.mobileMenu = this.mobileMenu ? false : true;
     },
 
-    loadSharePrice() {
-        
+    sharePrice() {
+      const [_self, stockCompanies] = [this, this.$store.getters.getStockCompanies];
+      
+      if(stockCompanies.length > 0) {
+        stockCompanies.forEach(function(e, i) {
+            
+            let box = stockCompanies[i];
+            let symbols = '';
+            
+            box.forEach(function(c, p){
+              symbols +=  ( p === box.length - 1 ) ? box[p] : box[p] + ',';
+            });  
+
+            _self.$store.dispatch('sharePrice', {
+              symbols
+            })
+
+            axios.get( )
+            .then(function(response) {   
+              _self.apiData.push(response.data.data);     
+            })
+            .catch(error => { 
+              console.log(error);
+            })
+            .finally(function() {
+            _self.processing = false;
+          })
+        }); 
+      }
+       
     },
     loadMutualFunds() {
         alert('nutual funds');

@@ -28,30 +28,7 @@ const sharePrice = Vue.component('share-price', {
     }, 
 
     methods: {
-        sharePrice() { 
-          const [_self, stockCompanies] = [this, Settings.stockCompanies()];
-          stockCompanies.forEach(function(e, i) {
-              let box = stockCompanies[i];
-              let symbols = '';
-              box.forEach(function(c, p){
-                symbols +=  ( p === box.length - 1 ) ? box[p] : box[p] + ',';
-              });  
-
-              axios.get( Settings.apiUrl + 'stock?symbol='+symbols+'&api_token=' + Settings.apiToken)
-              .then(function(response) {   
-                _self.apiData.push(response.data.data);     
-              })
-              .catch(error => { 
-                console.log(error);
-              })
-              .finally(function() {
-              _self.processing = false;
-            })
-    
-          });  
-
-          
-        },
+        
         
         intraDayData(symbol) {
             const _self = this; 
