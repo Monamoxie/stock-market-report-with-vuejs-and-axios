@@ -59,6 +59,7 @@
 
                         @sharePrice="sharePrice"
                         @intraDayData="intraDayData"
+                        @closeIntraDayOverlay="closeIntraDayOverlay"
                         @loadMutualFunds="loadMutualFunds"></router-view> 
                 </div>  
 
@@ -190,6 +191,10 @@ export default {
         this.overlayLoader = false
       })
        
+    },
+
+    closeIntraDayOverlay() {
+      this.showOverlay = false
     },
 
     loadMutualFunds() {

@@ -55,7 +55,9 @@
                 <div v-if="showOverlay">
                     <div class="overlay-banner">
                         <div class="overlay-content">
-                            <p class="pull-right"><button v-on:click="showOverlay = false" class="btn btn-danger">X</button></p>
+                            <p class="pull-right">
+                              <button v-on:click="closeIntraDayOverlay" class="btn btn-danger">X</button>
+                            </p>
                             <div class="clearfix"></div>
 
                             <div v-if="overlayLoader">
@@ -137,6 +139,9 @@ export default {
       this.$emit('intraDayData', {
         symbol
       })
+    },
+    closeIntraDayOverlay() {
+      this.$emit('closeIntraDayOverlay')
     }
   },
 
