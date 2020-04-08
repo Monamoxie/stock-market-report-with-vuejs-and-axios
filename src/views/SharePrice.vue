@@ -52,13 +52,13 @@
                     </tbody>
                 </table> 
 
-                <div v-if="overlay">
+                <div v-if="showOverlay">
                     <div class="overlay-banner">
                         <div class="overlay-content">
-                            <p class="pull-right"><button v-on:click="overlay = false" class="btn btn-danger">X</button></p>
+                            <p class="pull-right"><button v-on:click="showOverlay = false" class="btn btn-danger">X</button></p>
                             <div class="clearfix"></div>
 
-                            <div v-if="!overlayLoader">
+                            <div v-if="overlayLoader">
                               <div class="lds-ring">
                                 <div></div><div></div><div></div><div></div>
                               </div> 
@@ -66,14 +66,14 @@
                             </div>
 
                             <div v-else>
-                                <!-- <div v-if="overlayData != null ">
+                                <div v-if="overlayData != null ">
                                   <div class="overlay-data">
                                     <h4> Trading Name: {{ overlayData.symbol }} </h4>
-                                    <ul>
-                                        <li>Stock Exchange Market: <span> {{ overlayData.stock_exchange_short }} </span></li> 
-                                        <li>Stock Timezone: <span> {{ overlayData.timezone_name }} </span></li>
-                                    </ul> 
-                                    <div v-for="(data, key) in overlayData.intraday">
+                                    <div v-for="(data, key) in overlayData" :key="key">
+                                        <ul>
+                                          <li>Stock Exchange Market: <span> <b>{{ data.stock_exchange_short }}</b> </span></li> 
+                                          <li>Stock Timezone: <span> <b>{{ data.timezone_name }}</b> </span></li>
+                                        </ul>  
                                         <p><b> Date and Time: <span> {{ key }} </span></b> </p>
                                         <p> Opening Price: USD {{ data.open }} </p>
                                         <p> Closing Price: USD {{ data.close }} </p>
@@ -83,12 +83,12 @@
                                         <hr>
                                     </div>
                                   </div>
-                                </div> -->
-                             <!-- <div v-else>
+                                </div> 
+                               <div v-else>
                                     <div class="alert alert-danger text-center">
                                         No record found
                                     </div>
-                                </div>-->
+                                </div>
                             </div> 
 
                         </div>
@@ -107,16 +107,7 @@
 
 export default {
   name: 'SharePrice',
-
-  data() {
-        return { 
-          overlay: false,
-          overlayLoader: false,
-        } 
-  },
-
-  
-
+ 
   props: {
     processing: {
       type: Boolean,
@@ -132,15 +123,20 @@ export default {
     },
     overlayData: {
       type: Array
+    },
+    showOverlay: {
+      type: Boolean
+    },
+    overlayLoader: {
+      type: Boolean
     }
   },
 
   methods: {
     intraDayData(symbol) {
-      this.overlayLoader = true
       this.$emit('intraDayData', {
         symbol
-      }) 
+      })
     }
   },
 

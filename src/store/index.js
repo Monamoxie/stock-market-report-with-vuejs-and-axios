@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-axios.defaults.withCredentials = true
+///axios.defaults.withCredentials = false
 
 Vue.use(Vuex)
 
@@ -29,7 +29,7 @@ export default new Vuex.Store({
      */
     stockCompanies: [ 
         ['APA', 'GE', 'F', 'ADBE', 'ORCL'],
-        ['MSFT', 'HPQ', 'GM', 'NVDA', 'KO'],
+        //['MSFT', 'HPQ', 'GM', 'NVDA', 'KO'],
     ],
 
     /**
@@ -117,16 +117,15 @@ export default new Vuex.Store({
     },
 
     intraDayData(context, payload) {
-      alert('dddd')
-      // return new Promise((resolve, reject) => {
-      //   axios.get(context.getters.getIntraDayApiUrl + 'stock?symbol='+payload.symbol+'&api_token=' + context.getters.getApiToken +  '&interval=60&range=1')
-      //   .then(response => { 
-      //       resolve(response)
-      //   })
-      //   .catch(errors => { 
-      //     reject(errors)
-      //   })
-      // })
+      return new Promise((resolve, reject) => {
+        axios.get(context.getters.getIntraDayApiUrl + 'stock?symbol='+payload.symbol+'&api_token=' + context.getters.getApiToken +  '&interval=60&range=1')
+        .then(response => { 
+            resolve(response)
+        })
+        .catch(errors => { 
+          reject(errors)
+        })
+      })
     }
   }, 
 })

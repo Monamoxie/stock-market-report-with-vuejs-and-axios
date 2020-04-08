@@ -54,7 +54,11 @@
                         :serverResponse="serverResponse"
                         :companiesData="companiesData"
                         :overlayData="overlayData"
-                        @sharePrice="sharePrice" 
+                        :showOverlay="showOverlay"
+                        :overlayLoader="overlayLoader"
+
+                        @sharePrice="sharePrice"
+                        @intraDayData="intraDayData"
                         @loadMutualFunds="loadMutualFunds"></router-view> 
                 </div>  
 
@@ -87,7 +91,9 @@ export default {
       path: '/',
       data: [],
       serverResponse: [],
-      overlayData: []
+      overlayData: [],
+      showOverlay: false,
+      overlayLoader: false,
     }
   },
  
@@ -129,12 +135,12 @@ export default {
       const [_self, stockCompanies] = [this, this.$store.getters.getStockCompanies];
       
       if(stockCompanies.length > 0) {
-        stockCompanies.forEach(function(e, i) {
+        stockCompanies.forEach((e, i) => {
             
             let box = stockCompanies[i];
             let symbols = '';
             
-            box.forEach(function(c, p){
+            box.forEach((c, p) => {
               symbols +=  ( p === box.length - 1 ) ? box[p] : box[p] + ',';
             });  
 
@@ -153,7 +159,8 @@ export default {
               }]   
             })
             .finally(() => {
-              _self.processing = false;
+              _self.processing = false
+              
           })
           
         }); 
@@ -161,25 +168,28 @@ export default {
        
     },
 
-    intraDayData(symbol) {
-         _self = this;
-          _self.$store.dispatch('intraDayData', {
-            symbol
-          })
-          .then(function(response) {   
-            _self.overlayData.push(response.data); 
-          })
-          .catch(error => { 
-            console.log(error);
-            this.serverResponse = [{
-            'status': 'error',
-            'message': 'An error occured. Request was not processed',
-            'errors': error.response.data.errors !== null && error.response.data.errors !== undefined ? Object.values(error.response.data.errors) : []
-            }]   
-          })
-          .finally(() => {
-            _self.processing = false;
+    intraDayData(data) {
+      this.showOverlay = true
+      this.overlayLoader = true
+      this.$store.dispatch('intraDayData', {
+          symbol: data.symbol
         })
+        .then((response) => { 
+          console.log(response.data.data)  
+          this.overlayData = response.data.data
+        })
+        .catch(error => { 
+          console.log(error)
+          this.serverResponse = [{
+          'status': 'error',
+          'message': 'An error occured. Request was not processed',
+          'errors': error.response.data.errors !== null && error.response.data.errors !== undefined ? Object.values(error.response.data.errors) : []
+        }]   
+      })
+      .finally(() => { 
+        this.overlayLoader = false
+      })
+       
     },
 
     loadMutualFunds() {
