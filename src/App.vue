@@ -13,9 +13,9 @@
                             <i class="fa fa-bar-chart"></i> Share Price 
                         </li>
                     </a>
-                    <a href="/mutual-funds">
-                        <li :class="path === '/mutual-funds' ? 'active' : ''"> 
-                            <i class="fa fa-users"></i> Mutual Funds 
+                    <a href="/forex">
+                        <li :class="path === '/forex' ? 'active' : ''"> 
+                            <i class="fa fa-users"></i> Forex 
                         </li>
                     </a> 
                     <a href="https://www.worldtradingdata.com/documentation#introduction" target="_blank">
@@ -36,7 +36,7 @@
 
                 <ul class="top-url-links">  
                     <li class="avatar-wrap"> 
-                        <span> <img src="images/dp.jpg" alt="Avatar" /> </span>  
+                        <span> <img src="../src/assets/images/dp.jpg" alt="Avatar" /> </span>  
                     </li> 
                     <div class="clearfix"></div>
                 </ul>
@@ -60,7 +60,7 @@
                         @sharePrice="sharePrice"
                         @intraDayData="intraDayData"
                         @closeIntraDayOverlay="closeIntraDayOverlay"
-                        @loadMutualFunds="loadMutualFunds"></router-view> 
+                        @forex="forex"></router-view> 
                 </div>  
 
             </div>
@@ -109,7 +109,7 @@ export default {
         return this.mobileMenu;
     },
     companiesData() {
-      // console.log(this.data.flat())
+      console.log(this.data.flat())
       return this.data.flat()
     },
 
@@ -197,8 +197,28 @@ export default {
       this.showOverlay = false
     },
 
-    loadMutualFunds() {
-      alert('nutual funds');
+    forex() {
+        const [_self] = [this];
+          _self.$store.dispatch('forex')
+          .then((response) => {   
+            _self.data.push(response.data); 
+          })
+          .catch(error => { 
+            console.log(error);
+            this.serverResponse = [{
+            'status': 'error',
+            'message': 'An error occured. Request was not processed',
+            'errors': error.response.data.errors !== null && error.response.data.errors !== undefined ? Object.values(error.response.data.errors) : []
+            }]   
+          })
+          .finally(() => {
+            _self.processing = false                
+          }) 
+        
+        
+ 
+         
+            
     }
 
     

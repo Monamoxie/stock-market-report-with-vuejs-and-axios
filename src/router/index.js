@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import SharePrice from '../views/SharePrice.vue'
-import MutualFunds from '../views/MutualFunds.vue'
+import Forex from '../views/Forex.vue'
 
 Vue.use(VueRouter)
 
@@ -12,14 +12,14 @@ Vue.use(VueRouter)
     component: SharePrice
   },
   {
-    path: '/mutual-funds',
-    name: 'MutualFunds',
-    component: MutualFunds
+    path: '/forex',
+    name: 'forex',
+    component: Forex
   },
 
   { 
     path: '*', 
-    redirect: '/share-price'
+    redirect: '/'
   }
 ]
 

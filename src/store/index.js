@@ -126,6 +126,20 @@ export default new Vuex.Store({
           reject(errors)
         })
       })
-    }
+    },
+
+    forex(context) {
+      return new Promise((resolve, reject) => {
+        // symbol='+payload.symbols+'&api_token=' + context.getters.getApiToken +  '&sort_by=list_order
+        axios.get(context.getters.getDefaultApiUrl + 'forex?base=USD&api_token=' + context.getters.getApiToken)
+        .then(response => { 
+            resolve(response)
+        })
+        .catch(errors => { 
+          reject(errors)
+        })
+      })
+    },
+
   }, 
 })
