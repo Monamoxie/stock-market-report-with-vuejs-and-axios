@@ -1,4 +1,4 @@
-![Logo](images/logo.png)
+![Logo](src/assets/images/logo.png)
 
 A live monitor of publicly traded companies on the stock market and mutual fund companies with VueJS, Axios and API endpoints from the World Trading Data (WDT).
 It comes pre bundled with the ability to 
@@ -24,9 +24,9 @@ It comes pre bundled with the ability to
 
 https://stock-xchanger.herokuapp.com
 
-![Image 1](images/stock_market.png)
+![Image 1](src/assets/images/stock_market.png)
 
-![Image 2](images/stock_market_info.png)
+![Image 2](src/assets/images/stock_market_info.png)
 
 # LICENSE 
 MIT License
