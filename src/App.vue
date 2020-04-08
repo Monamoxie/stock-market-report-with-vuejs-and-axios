@@ -116,18 +116,6 @@ export default {
   },
   methods: {
 
-    getCurrYear() {
-      return this.currDate.getFullYear();
-    },
-        
-    getCurrMonth() {
-      return this.currDate.getMonth();
-    },
-
-    getCurrDay() {
-      return this.currDate.getDate();
-    },  
- 
     mobileToggler() {
       this.mobileMenu = this.mobileMenu ? false : true;
     },
