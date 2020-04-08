@@ -29,7 +29,10 @@ html, body {
     flex-flow: row;
     height: 100%;
 }
+a:hover {
+    text-decoration: none;
 
+}
 /**
 * Left wrapper
 */

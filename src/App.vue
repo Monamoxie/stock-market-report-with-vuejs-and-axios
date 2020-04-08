@@ -5,7 +5,7 @@
         <div class="left-wrapper pull-left" :class="[ mobileMenu ? 'mobile-menu ' : '' ]">
             <div class="side-navigation">
                 <div class="logo-wrapper">
-                   <h2> Stock Xchanger </h2> 
+                   <a href="/"><h2> Stock Xchanger </h2> </a>
                 </div>
                 <ul class="side-url-links"> 
                     <a href="/">
