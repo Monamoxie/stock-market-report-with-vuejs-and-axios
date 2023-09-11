@@ -20,10 +20,6 @@ It comes pre bundled with the ability to
 * Render charts with the data sets
 * Compare analytics for 2 or more companies on the stock market 
 
-# DEMO URL
-
-https://stock-xchanger.herokuapp.com
-
 ![Image 1](src/assets/images/stock_market.png)
 
 ![Image 2](src/assets/images/stock_market_info.png)
