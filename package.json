@@ -18,10 +18,10 @@
     "vuex": "^4.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.3.0",
-    "@vue/cli-plugin-router": "~4.3.0",
-    "@vue/cli-plugin-vuex": "~4.3.0",
-    "@vue/cli-service": "~4.3.0",
+    "@vue/cli-plugin-babel": "~5.0.9",
+    "@vue/cli-plugin-router": "~5.0.9",
+    "@vue/cli-plugin-vuex": "~5.0.9",
+    "@vue/cli-service": "~5.0.9",
     "node-sass": "^9.0.0",
     "sass-loader": "^16.0.5",
     "vue-template-compiler": "^2.6.11"
